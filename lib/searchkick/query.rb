@@ -597,6 +597,8 @@ module Searchkick
           if value.is_a?(Hash)
             value.each do |op, op_value|
               case op
+              when :exists
+                binding.pry
               when :within, :bottom_right
                 # do nothing
               when :near
