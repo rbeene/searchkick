@@ -68,6 +68,14 @@ class WhereTest < Minitest::Test
     assert_search "product", ["Product A"], where: {color: nil}
   end
 
+  def test_where_exists
+    store [
+      {name: "Product A"},
+      {name: "Product B", color: "red"}
+    ]
+    assert_search "product", ["Product B"], where: {exists: "color"}
+  end
+
   def test_where_id
     store_names ["Product A"]
     product = Product.last

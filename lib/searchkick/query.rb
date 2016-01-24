@@ -598,7 +598,7 @@ module Searchkick
             value.each do |op, op_value|
               case op
               when :exists
-                binding.pry
+                filters << {exists: {field: op_value}}
               when :within, :bottom_right
                 # do nothing
               when :near
