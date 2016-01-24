@@ -587,6 +587,7 @@ module Searchkick
             filters << {or: or_clause.map { |or_statement| {and: where_filters(or_statement)} }}
           end
         else
+          binding.pry
           # expand ranges
           if value.is_a?(Range)
             value = {gte: value.first, (value.exclude_end? ? :lt : :lte) => value.last}
@@ -597,9 +598,6 @@ module Searchkick
           if value.is_a?(Hash)
             value.each do |op, op_value|
               case op
-              when :exists
-                binding.pry
-                filters << {exists: {field: op_value}}
               when :within, :bottom_right
                 # do nothing
               when :near
